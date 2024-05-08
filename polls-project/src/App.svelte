@@ -1,1 +1,1 @@
-<p>hello world</p>
+//main component for polls project
