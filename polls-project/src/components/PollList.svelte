@@ -1,10 +1,14 @@
 <script>
+    import PollDetails from './PollDetails.svelte';
     export let polls=[];
 </script>
 
 <div class="poll-list">
     {#each polls as poll (poll.id)}
-        <div>{poll.question}</div>
+        <div>
+            <!-- vote event will be forwarded to the parent component -->
+            <PollDetails {poll} on:vote />
+        </div>
     {/each}
 </div>
 

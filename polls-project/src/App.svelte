@@ -1,6 +1,8 @@
 <!-- main component for polls project -->
 
 <script>
+// @ts-nocheck
+
     import Header from './components/Header.svelte';
     import Footer from './components/Footer.svelte';
     import Tabs from './shared/Tabs.svelte';
@@ -31,14 +33,26 @@
         polls = [poll,...polls];
         activeItem = 'Current Polls';
     }
+    const handleVote = (e)=>{
+        const {option,id} =e.detail;  
+        let copiedPolls = [...polls];
+        let poll = copiedPolls.find(poll=>poll.id === id);
+        if(option === 'a'){
+            poll.votesA++;
+        }
+        if(option === 'b'){  
+            poll.votesB++;
+        }
+        polls = copiedPolls;
+    }
 </script>
 
 <Header />
 <main>
     <Tabs {activeItem} {items} on:tabChange = {tabChange}/>
     {#if activeItem == 'Current Polls'}
-        <PollList {polls}/>
-    {:else if activeItem == 'Add New Poll'}
+        <PollList {polls} on:vote={handleVote}/>
+    {:else if activeItem === 'Add New Poll'}
         <CreatePollForm on:add={handleAdd}/>
     {/if}
 </main>
