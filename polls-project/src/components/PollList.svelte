@@ -1,6 +1,19 @@
 <script>
+    import {onMount,onDestroy } from 'svelte';
     import PollDetails from './PollDetails.svelte';
+    import PollStore from '../stores/PollStore.js';
     export let polls=[];
+
+    const unsub = PollStore.subscribe((data)=>{
+        polls = data;
+    });
+
+
+    onMount(()=>{})
+
+    onDestroy(()=>{
+        unsub();
+    })
 </script>
 
 <div class="poll-list">
