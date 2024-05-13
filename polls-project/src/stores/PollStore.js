@@ -1,15 +1,15 @@
 // @ts-ignore
 import {writable} from 'svelte/store';
 
-const PollStore = writable([
+const PollStore = writable(JSON.parse(localStorage.getItem('polls')) || [
     {
-        id:1,
-        question:'What is your favorite programming language?',
-        answerA:'JavaScript',
-        answerB:'Python',
-        votesA:10,
-        votesB:5
+        question: 'React or Svelte?',
+        answerA: 'React',
+        answerB: 'Svelte',
+        votesA: 9,
+        votesB: 15
     },
 ]);
 
+PollStore.subscribe((value) => localStorage.setItem('polls', JSON.stringify(value)));
 export default PollStore;

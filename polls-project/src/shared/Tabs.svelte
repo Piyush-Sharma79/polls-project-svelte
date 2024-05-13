@@ -1,5 +1,6 @@
 <script>
     import {createEventDispatcher} from 'svelte';
+  import Button from './Button.svelte';
     const dispatch = createEventDispatcher();
     export let items;
     export let activeItem;
@@ -15,6 +16,11 @@
             </li>
         {/each}
     </ul>
+    <Button on:click = {()=> {
+        localStorage.clear();
+        location.reload();
+    }}>Delete All Polls</Button>
+
 </div>
 
 <style>
