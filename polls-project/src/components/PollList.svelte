@@ -1,7 +1,11 @@
 <script>
-    import {onMount,onDestroy } from 'svelte';
+   
     import PollDetails from './PollDetails.svelte';
     import PollStore from '../stores/PollStore.js';
+    import {onMount,onDestroy } from 'svelte';
+    import {fade,slide ,scale} from 'svelte/transition';
+    import {flip} from 'svelte/animate';
+    
     // export let polls=[];
 
     // const unsub = PollStore.subscribe((data)=>{
@@ -14,11 +18,12 @@
     // onDestroy(()=>{
     //     unsub();
     // })
+
 </script>
 
-<div class="poll-list">
+<div class="poll-list" in:fade>
     {#each $PollStore as poll (poll.id)}
-        <div>
+        <div in:fade out:scale|local animate:flip = {{duration:500}}>
             <!-- vote event will be forwarded to the parent component -->   
             <!-- <PollDetails {poll} on:vote /> -->
             <PollDetails {poll} />
